@@ -27,22 +27,28 @@ chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
 });
 
 function showMismatch(dataUrl) {
-    var highlight = document.createElement('div');
-    highlight.id="highlight";
-    highlight.style.width = "100%";
-    highlight.style.height = "100%";
-    highlight.style.top = "0px";
-    highlight.style.left = "0px";
-    highlight.style.backgroundImage = "url(" + dataUrl + ")";
-    highlight.style.backgroundSize = "cover"
-    highlight.style.position = "fixed";
-    highlight.style.zIndex = "1000";
-    highlight.style.backgroundColor = "rgba(0, 255, 0, 0.5)"; 
-    
-    highlight.onclick = function() {
-      // click can remove the highlighted area
-      this.remove(); 
-  };
+  var existingHighlight = document.getElementById('highlight');
+  if (existingHighlight) {
+    //remove the oldhightlight first
+      existingHighlight.remove();
+  }
+
+  var highlight = document.createElement('div');
+  highlight.id="highlight";
+  highlight.style.width = "100%";
+  highlight.style.height = "100%";
+  highlight.style.top = "0px";
+  highlight.style.left = "0px";
+  highlight.style.backgroundImage = "url(" + dataUrl + ")";
+  highlight.style.backgroundSize = "cover"
+  highlight.style.position = "fixed";
+  highlight.style.zIndex = "1000";
+  highlight.style.backgroundColor = "rgba(0, 255, 0, 0.5)"; 
   
-    document.body.appendChild(highlight);
+  highlight.onclick = function() {
+    // click can remove the highlighted area
+    this.remove(); 
+};
+
+  document.body.appendChild(highlight);
 }

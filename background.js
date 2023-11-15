@@ -4,12 +4,13 @@ let screenshots = {};
 
 function captureScreenshots(tabId) {
     chrome.tabs.captureVisibleTab({format : "png"}, function(image){
-        if(chrome.runtime.lastError) {
+        if (chrome.runtime.lastError) {
             return;
         }
         screenshots[tabId] = image;
+        console.log("Screenshot captured for tabId: " + tabId);
     });
-    console.log("screenshots", screenshots)
+    console.log("screenshots", screenshots);
 }
 
 function alarmUser(tabId){
@@ -53,12 +54,25 @@ function checkTabNabbing(activeInfo) {
       });
     } else {
         console.log("new tab. Taking a screen shot.");
-        captureScreenshots(activeInfo.tabId);
+        setTimeout(() => {
+            captureScreenshots(activeInfo.tabId);
+        }, 1000);
     }
   }
 
 chrome.tabs.onActivated.addListener(activeInfo => {
     checkTabNabbing(activeInfo);
+});
+
+chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
+    if (changeInfo.status === 'complete' && tab.active) {
+        let activeInfo = {
+            tabId: tabId,
+            windowId: tab.windowId
+        };
+        
+        checkTabNabbing(activeInfo);
+    }
 });
 
 setInterval(() => {
