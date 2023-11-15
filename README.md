@@ -5,7 +5,7 @@ Tabnabbing Attack Detector is a Chrome Extension designed to enhance your browsi
 ## Demo
 
 - Main Popup Page
-    - [Image .images/mainpage.png]
+    - [Image https://github.com/Kennnnn774/Tabnabbing-Attack-Detector/blob/main/images/icon.png]
 - Icon Bar
     - [Image .images/iconbar.png]
 - Icon Bar with warning
