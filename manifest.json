@@ -2,8 +2,8 @@
     "manifest_version": 3,
     "name": "Tabnabbing Attack Detector",
     "version": "1.0",
-    "permissions": ["<all_urls>","activeTab","tabs", "tabCapture","*://*/*"],
     "host_permissions": ["<all_urls>"],
+    "permissions": ["tabs", "activeTab"],
     "background": {
         "service_worker": "background.js"
     },
