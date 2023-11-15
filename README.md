@@ -1,4 +1,4 @@
-# Tabnabbing Attack Detector ![Icon](https://imgur.com/XbIiT8D)
+# Tabnabbing Attack Detector ![Icon](https://imgur.com/XbIiT8D.png)
 
 ## Description
 Tabnabbing Attack Detector is a Chrome Extension designed to enhance your browsing security by detecting unexpected changes in web pages when you switch between tabs. This tool is particularly useful for identifying "tabnabbing" attacks, where a previously safe and familiar web page is replaced with a malicious one while the tab is not in focus.
@@ -6,15 +6,15 @@ Tabnabbing Attack Detector is a Chrome Extension designed to enhance your browsi
 ## Demo
 
 - Main Popup Page
-    - ![Popup page](https://imgur.com/2b4vsMa)
+    - ![Popup page](https://imgur.com/2b4vsMa.png)
 - Icon Bar
-    - ![Popup page](https://imgur.com/FWHhfAn)
+    - ![Popup page](https://imgur.com/FWHhfAn.png)
 - Icon Bar with warning
-    - ![Icon Bar with warning](https://imgur.com/WS7yiXY)
+    - ![Icon Bar with warning](https://imgur.com/WS7yiXY.png)
 - Normal webpage
-    - ![Normal webpage](https://imgur.com/HAplmoq)
+    - ![Normal webpage](https://imgur.com/HAplmoq.png)
 - Webpage after detecting the change
-    - ![Webpage after detecting the change](https://imgur.com/Ge6Ad2v)
+    - ![Webpage after detecting the change](https://imgur.com/Ge6Ad2v.png)
 
 
 
