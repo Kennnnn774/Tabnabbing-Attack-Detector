@@ -1,9 +1,13 @@
 chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
+  if (chrome.runtime.lastError) {
+    // Handle the error here
+    return;
+  } else {
     console.log("Comparing and displaying.");
     console.log("message", message);
     oldImage = message.prevData;
     newImage = message.newData;
-
+  
     resemble(newImage).compareTo(oldImage).onComplete(
         function(data) {
           console.log("Mismatch percentage: ", data.misMatchPercentage);
@@ -18,30 +22,32 @@ chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
           sendResponse({status: 'ok'});
         }
       );
-
+      return true;
+  }
 });
 
 function showMismatch(dataUrl) {
-    var result = document.createElement('div');
-    result.id="result";
-    result.style.width = "100%";
-    result.style.height = "100%";
-    result.style.top = "0px";
-    result.style.left = "0px";
-    result.style.backgroundImage = "url(" + dataUrl + ")";
-    result.style.backgroundSize = "100% 100%"
-    result.style.position = "fixed";
+    var highlight = document.createElement('div');
+    highlight.id="tabdiff";
+    highlight.style.width = "100%";
+    highlight.style.height = "100%";
+    highlight.style.top = "0px";
+    highlight.style.left = "0px";
+    highlight.style.backgroundImage = "url(" + dataUrl + ")";
+    highlight.style.backgroundSize = "cover"
+    highlight.style.position = "fixed";
+    highlight.style.zIndex = "1000";
+    highlight.style.backgroundColor = "rgba(0, 255, 0, 0.5)"; 
 
-    result.addEventListener("click", function(){
-        var temp = document.getElementById('result')
-            temp.parentNode.removeChild(temp);
-        });
-    
-    document.body.appendChild(result);
+    highlight.onclick = function() {
+      this.remove(); // 'this' refers to the result element
+  };
+  
+    document.body.appendChild(highlight);
 }
 
 
-// function highlightChanges(data) {
+// function showMismatch(dataUrl) {
 //     // Example logic - this needs to be adapted based on how data is structured
 //     // and how you're able to map changes to specific elements or positions on the page
 
@@ -60,6 +66,7 @@ function showMismatch(dataUrl) {
 //     // Assuming data provides coordinates or a way to identify changed areas
 //     data.changedAreas.forEach(area => {
 //         let highlight = document.createElement('div');
+//         highlight.style.backgroundImage = "url(" + dataUrl + ")";
 //         highlight.style.position = 'absolute';
 //         highlight.style.left = area.x + 'px';
 //         highlight.style.top = area.y + 'px';

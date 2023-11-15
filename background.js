@@ -5,7 +5,6 @@ let screenshots = {};
 function captureScreenshots(tabId) {
     chrome.tabs.captureVisibleTab({format : "png"}, function(image){
         if(chrome.runtime.lastError) {
-            console.log(chrome.runtime.lastError.message);
             return;
         }
         screenshots[tabId] = image;
@@ -22,12 +21,15 @@ function checkTabNabbing(activeInfo) {
   
       chrome.tabs.captureVisibleTab({format : "png"}, function(image){
         if(chrome.runtime.lastError) {
-            console.log(chrome.runtime.lastError.message);
             return;
         }
   
         chrome.tabs.sendMessage( activeInfo.tabId, {prevData: prevScreenshots, newData: image}, 
             function(response) {
+                if (chrome.runtime.lastError) {
+                    // Handle the error
+                    return;
+                }
           });
       });
     } else {

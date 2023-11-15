@@ -1,6 +1,6 @@
 {
     "manifest_version": 3,
-    "name": "Tabnabbing Detector",
+    "name": "Tabnabbing Attack Detector",
     "version": "1.0",
     "permissions": ["<all_urls>","activeTab","tabs", "tabCapture","*://*/*"],
     "host_permissions": ["<all_urls>"],
@@ -10,13 +10,22 @@
     "action": {
         "default_popup": "popup.html",
         "default_icon": {
-            "16": "images/icon-16.png",
-            "24": "images/icon-24.png",
-            "32": "images/icon-32.png",
-            "64": "images/icon-64.png",
-            "128": "images/icon-128.png"
+            "16": "/images/icon-16.png",
+            "24": "/images/icon-24.png",
+            "48": "/images/icon-64.png",
+            "32": "/images/icon-32.png",
+            "64": "/images/icon-64.png",
+            "128": "/images/icon-128.png"
           },
-        "default_title": "Tabnabbing Detector"
+        "default_title": "Tabnabbing Attack Detector"
+    },
+    "icons":{
+        "16": "/images/icon-16.png",
+        "24": "/images/icon-24.png",
+        "48": "/images/icon-64.png",
+        "32": "/images/icon-32.png",
+        "64": "/images/icon-64.png",
+        "128": "/images/icon-128.png"
     },
     "description": "Identify tabnabbing websites and detect the change",
     "content_scripts": [
