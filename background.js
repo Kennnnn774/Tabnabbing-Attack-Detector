@@ -1,4 +1,4 @@
-let screenshotInterval = 10000; // Interval for taking screenshots (e.g., 10000 ms = 10 seconds)
+let screenshotInterval = 10000; 
 let currInfo = null;
 let screenshots = {};
 
@@ -12,8 +12,27 @@ function captureScreenshots(tabId) {
     console.log("screenshots", screenshots)
 }
 
+function alarmUser(tabId){
+    try {
+        // Set the badge background color to yellow
+        chrome.action.setBadgeBackgroundColor({ color: '#FFFF00' });
+        // Set the badge text to "!!!"
+        chrome.action.setBadgeText({text: "!", tabId: tabId});
+    } catch (error) {
+        return;
+    }
+}
+
+function clearBadge(tabId){
+    try {
+        chrome.action.setBadgeText({text: "",tabId: tabId});
+    } catch (error) {
+        return;
+    }
+}
+
 function checkTabNabbing(activeInfo) {
-    currInfo = activeInfo; // Update the info
+    currInfo = activeInfo; // Update the info so that we can set interval
     if (activeInfo.tabId in screenshots) {
       console.log("old tab. Comparing...");
       
@@ -24,7 +43,7 @@ function checkTabNabbing(activeInfo) {
             return;
         }
   
-        chrome.tabs.sendMessage( activeInfo.tabId, {prevData: prevScreenshots, newData: image}, 
+        chrome.tabs.sendMessage( activeInfo.tabId, {oldImage: prevScreenshots, newImage: image, currId: activeInfo.tabId}, 
             function(response) {
                 if (chrome.runtime.lastError) {
                     // Handle the error
@@ -47,3 +66,17 @@ setInterval(() => {
         checkTabNabbing(currInfo);
     }
 }, screenshotInterval);
+
+chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
+    console.log("background message", message)
+    // Check if a mismatch was found and update the badge
+    if (message.misMatchFound) {
+        alarmUser(message.tabId);
+    } else {
+        clearBadge(message.tabId);
+    }
+});
+
+
+
+

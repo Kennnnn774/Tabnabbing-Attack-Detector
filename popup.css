@@ -1,10 +1,41 @@
 /* popup.css */
-.popup {
-    width: 280px;
-    color: #314d3e;
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f7f7f7;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 200px;
 }
 
-#name{
+.popup {
+    width: 280px;
+    padding: 10px;
+    color: #314d3e;
+    text-align: center;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    background-color: #ffffff;
+}
+
+.icon {
+    width: 48px;
+    height: 48px;
+    margin-bottom: 8px;
+}
+
+#name {
     font-size: 18px;
     font-weight: bold;
+    color: #1a8f5a;
+    margin: 0;
+    margin-bottom: 12px;
+}
+
+p {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.4;
 }
